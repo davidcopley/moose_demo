@@ -7,19 +7,21 @@ class ResultBlock extends React.Component{
         const {name,description,category,subcategory,meta} = this.props
         return (
             <Card style={{minWidth:300,width:"70vw", maxHeight:500,marginTop:20,background:"rgba(255,255,255,0.8)"}}>
-                <CardTitle>
+                <CardTitle style={{paddingBottom:0, color:'gray'}}>
                     Name
                 </CardTitle>
                 <CardText>
-                    <span style={{fontSize:20}}>{name||"No Name"}</span> - {subcategory||"No Subcategory"}, {category||"No Subcategory"}
+                    <span style={{fontSize:20}}><b>{name||"No Name"}</b></span> - {subcategory||"No Subcategory"}, {category||"No Subcategory"}
                 </CardText>
-                <CardTitle>
+                <CardTitle style={{paddingBottom:0, color:'gray'}}>
                     Description
                 </CardTitle>
                 <CardText style={{overflowY:'auto'}}>
                     {description||"No Description"}
                 </CardText>
-                <CardTitle>Meta Data</CardTitle>
+                <CardTitle style={{color:'gray'}}>
+                    Meta Data
+                </CardTitle>
                 <CardMedia style={{maxHeight:150,overflowY:'auto'}}>
                     <List style={{background:"#eeeeee"}}>
                         {meta?Object.keys(meta).filter(key=>meta[key] !== " ").map(key=>{
