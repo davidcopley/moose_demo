@@ -59,8 +59,8 @@ export default class extends React.Component {
                 if (result.data.data) {
                     if (result.data.data.search) {
                         if (result.data.data.search.responses) {
-                            this.setState({numResults:result.data.data.search.responses.length})
-                            this.props.setResults(result.data.data.search.responses)
+                            this.setState({numResults:result.data.data.search.responses.length},this.props.setResults(result.data.data.search.responses))
+
                         }
                     }
                 }

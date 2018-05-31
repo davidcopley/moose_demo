@@ -77,7 +77,7 @@ class App extends Component {
                 </div>
             )
         }
-        const resultBlocks = results.map(result => {
+        const resultBlocks = results.map((result,i) => {
             const name = result['name']
             const description = result['description']
             const category = result['category']
@@ -88,7 +88,7 @@ class App extends Component {
             }
             return (
                 <ResultBlock
-                    key={name}
+                    key={`${name}+${category}+${subcategory}+${description}+${meta}+${i}`}
                     name={name}
                     category={category}
                     subcategory={subcategory}
@@ -101,6 +101,7 @@ class App extends Component {
     }
 
     render() {
+        console.log('render')
         return (
             <div className="App" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                 <TopBar setResults={this.setResults} style={{zIndex:10}}/>
