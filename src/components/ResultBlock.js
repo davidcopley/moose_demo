@@ -6,7 +6,7 @@ class ResultBlock extends React.Component{
     render(){
         const {name,description,category,subcategory,meta} = this.props
         return (
-            <Card style={{minWidth:300,width:"70vw", maxHeight:500,marginTop:20,background:"rgba(255,255,255,0.8)"}}>
+            <Card style={{minWidth:300,width:"70vw", maxHeight:600,marginTop:20,background:"rgba(255,255,255,0.8)"}}>
                 <CardTitle style={{paddingBottom:0, color:'gray'}}>
                     Name
                 </CardTitle>
@@ -22,7 +22,7 @@ class ResultBlock extends React.Component{
                 <CardTitle style={{color:'gray'}}>
                     Meta Data
                 </CardTitle>
-                <CardMedia style={{maxHeight:150,overflowY:'auto'}}>
+                <CardMedia style={{maxHeight:325,overflowY:'auto'}}>
                     <List style={{background:"#eeeeee"}}>
                         {meta?Object.keys(meta).filter(key=>meta[key] !== " ").map(key=>{
                             return(

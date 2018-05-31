@@ -9,6 +9,7 @@
     "react": "^16.4.0",
     "react-animated-enter": "^1.0.1",
     "react-dom": "^16.4.0",
+    "react-loading-bar": "^0.0.7",
     "react-scripts": "1.1.4"
   },
   "scripts": {

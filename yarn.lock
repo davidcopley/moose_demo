@@ -4283,6 +4283,10 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
+lodash._getnative@^3.0.0:
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/lodash._getnative/-/lodash._getnative-3.9.1.tgz#570bc7dede46d61cdcde687d65d3eecbaa3aaff5"
+
 lodash._reinterpolate@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
@@ -4298,6 +4302,22 @@ lodash.cond@^4.3.0:
 lodash.defaults@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
+
+lodash.isarguments@^3.0.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/lodash.isarguments/-/lodash.isarguments-3.1.0.tgz#2f573d85c6a24289ff00663b491c1d338ff3458a"
+
+lodash.isarray@^3.0.0:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
+
+lodash.keys@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/lodash.keys/-/lodash.keys-3.1.2.tgz#4dbc0472b156be50a0b286855d1bd0b0c656098a"
+  dependencies:
+    lodash._getnative "^3.0.0"
+    lodash.isarguments "^3.0.0"
+    lodash.isarray "^3.0.0"
 
 lodash.memoize@^4.1.2:
   version "4.1.2"
@@ -5671,6 +5691,12 @@ react-event-listener@^0.5.1:
     prop-types "^15.6.0"
     warning "^3.0.0"
 
+react-loading-bar@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/react-loading-bar/-/react-loading-bar-0.0.7.tgz#123d7765731b26d4aea21732817a2d6bb7e24ecb"
+  dependencies:
+    shallowequal "^0.2.2"
+
 react-scripts@1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-1.1.4.tgz#d5c230e707918d6dd2d06f303b10f5222d017c88"
@@ -6220,6 +6246,12 @@ sha.js@^2.4.0, sha.js@^2.4.8:
   dependencies:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
+
+shallowequal@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-0.2.2.tgz#1e32fd5bcab6ad688a4812cb0cc04efc75c7014e"
+  dependencies:
+    lodash.keys "^3.1.2"
 
 shebang-command@^1.2.0:
   version "1.2.0"

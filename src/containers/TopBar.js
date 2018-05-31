@@ -4,6 +4,10 @@ import SearchIcon from "../image/search.svg"
 import {IconButton, TextField, Checkbox, CircularProgress} from "material-ui";
 import "./textReflection.css"
 import axios from "axios"
+import Loading from 'react-loading-bar'
+import 'react-loading-bar/dist/index.css'
+
+
 
 
 const isMobileDevice = () => {
@@ -22,6 +26,7 @@ export default class extends React.Component {
         query: "",
         numResults:null,
         loading: false,
+        error:false
     }
 
     handleCheckboxClick = (checkbox, isChecked) => {
@@ -29,7 +34,7 @@ export default class extends React.Component {
     }
 
     search = () => {
-        this.setState({ loading: true })
+        this.setState({ loading: true, error: false })
         const {
             name,
             score,
@@ -69,7 +74,7 @@ export default class extends React.Component {
                 }
             }
         }).catch(err => {
-            this.setState({ loading: false })
+            this.setState({ loading: false , error: true})
             console.log(err)
         })
     }
@@ -98,6 +103,7 @@ export default class extends React.Component {
                     ...this.props.style
                 }}
             >
+                <div style={{position:"fixed",top:0}}><Loading show={loading} color={'#da2f47'} showSpinner={false}/></div>
                 <div style={{display: "flex", alignItems: "center", left: 0}}>
                     <img src={MooseIcon} style={{width: 80, height: 80, marginLeft: 10}} alt=""/>
                     {isMobileDevice() ||
@@ -129,7 +135,6 @@ export default class extends React.Component {
                         }
                     }}
                 />
-                {loading?<CircularProgress size={50} style={{position:'absolute',top:'3.5%',right:'25%',zIndex:1}}/>:null}
                 <IconButton
                     iconStyle={{width: '48px', height: '48px'}}
                     style={{width: '96px', height: '96px', padding: '24px'}}
