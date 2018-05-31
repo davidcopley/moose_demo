@@ -8,7 +8,7 @@ import {exampleResult} from "./mockData/example_result"
 class App extends Component {
 
     state = {
-        results: []
+        results: null
     }
 
     setResults = results => {
@@ -38,23 +38,64 @@ class App extends Component {
     ])
 
     renderResults = () => {
-        const resultBlocks = this.state.results.map(result => {
-            console.log(result)
+        if(this.state.results == null){
+            return(
+                <div style={{width:'100vh',height:'calc(100vh - 200px)',display:"flex",justifyContent:"center",alignItems:"center"}}>
+                    <span
+                        style={{
+                            fontFamily: 'Yellowtail',
+                            fontSize: 50,
+                            color: "#da2f47",
+                            display: 'inline-block',
+                            transform: 'rotate(-1deg)',
+                            marginLeft: 10
+                        }}
+                        className={'shine'}
+                    >
+                        Start asking questions!
+                    </span>
+                </div>
+            )
+        }
+        const results = this.state.results
+        if(results.length === 0){
+            return(
+                <div style={{width:'100vh',height:'calc(100vh - 100px)',display:"flex",justifyContent:"center",alignItems:"center"}}>
+                    <span
+                        style={{
+                            fontFamily: 'Yellowtail',
+                            fontSize: 50,
+                            color: "#da2f47",
+                            display: 'inline-block',
+                            transform: 'rotate(-1deg)',
+                            marginLeft: 10
+                        }}
+                        className={'shine'}
+                    >
+                        Sorry, 0 results...
+                    </span>
+                </div>
+            )
+        }
+        const resultBlocks = results.map(result => {
             const name = result['name']
             const description = result['description']
             const category = result['category']
             const subcategory = result['subcategory']
-            if (name && description && category && subcategory) {
-                return (
-                    <ResultBlock
-                        key={name}
-                        name={name}
-                        category={category}
-                        subcategory={subcategory}
-                        description={description}
-                    />
-                )
+            let meta = result['meta']
+            if(meta){
+                meta = JSON.parse(meta)
             }
+            return (
+                <ResultBlock
+                    key={name}
+                    name={name}
+                    category={category}
+                    subcategory={subcategory}
+                    description={description}
+                    meta={meta}
+                />
+            )
             return null
         })
         return resultBlocks
@@ -63,8 +104,9 @@ class App extends Component {
     render() {
         return (
             <div className="App" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                <TopBar setResults={this.setResults}/>
+                <TopBar setResults={this.setResults} style={{zIndex:10}}/>
                 {this.renderResults()}
+                <div style={{height:200}}/>
                 <div
                     style={{
                         flex: 1,
