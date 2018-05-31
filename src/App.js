@@ -106,7 +106,7 @@ class App extends Component {
             <div className="App" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                 <TopBar setResults={this.setResults} style={{zIndex:10}}/>
                 {this.renderResults()}
-                <div style={{height:200}}/>
+                {this.state.results&&this.state.results.length>0&&<div style={{height:200}}/>}
                 <div
                     style={{
                         flex: 1,
@@ -115,7 +115,7 @@ class App extends Component {
                         display: "flex",
                         alignItems: "flex-end",
                         background: 'linear-gradient(#fff, #b3e3ff)',
-                        zIndex: -10
+                        zIndex: -10,
                     }}
                 >
                     {this.renderMountains()}
