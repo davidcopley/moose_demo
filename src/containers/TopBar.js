@@ -2,7 +2,13 @@ import React from "react"
 import MooseIcon from "../image/moose_icon.png"
 import SearchIcon from "../image/search.svg"
 import {IconButton, TextField} from "material-ui";
+import isMobile from "ismobilejs"
 import "./textReflection.css"
+
+const isMobileDevice = () => {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+};
+
 export default (props) => {
     return (
         <div
@@ -17,6 +23,7 @@ export default (props) => {
         >
             <div style={{display: "flex", alignItems: "center", position: "absolute", left: 0}}>
                 <img src={MooseIcon} style={{width: 80, height: 80, marginLeft: 10}} alt=""/>
+                {isMobileDevice() ||
                 <span
                     style={{
                         fontFamily: 'Yellowtail',
@@ -28,8 +35,9 @@ export default (props) => {
                     }}
                     className={'text-reflect'}
                 >
-                        MOOSE <sup style={{fontSize:15}}>demo</sup>
+                        MOOSE <sup style={{fontSize: 15}}>demo</sup>
                 </span>
+                }
             </div>
             <TextField
                 style={{minWidth: 500, fontSize: 40}}

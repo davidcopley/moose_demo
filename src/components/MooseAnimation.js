@@ -25,7 +25,7 @@ class MooseAnimation extends React.Component {
     animateMoose = () => {
         const {defaultOffset} = this.props
         const currentOffset = this.state.currentOffset
-        const nextOffset = Math.random() * defaultOffset
+        const nextOffset = Math.random() * defaultOffset + 100
         const direction = nextOffset > currentOffset ? 1 : -1
         this.setState({currentOffset:nextOffset, direction})
     }
