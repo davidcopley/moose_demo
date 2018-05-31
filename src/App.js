@@ -4,7 +4,16 @@ import Mountain from "./image/mountains.svg"
 import MooseAnimation from "./components/MooseAnimation"
 import ResultBlock from "./components/ResultBlock"
 import {exampleResult} from "./mockData/example_result"
+
 class App extends Component {
+
+    state = {
+        results: []
+    }
+
+    setResults = results => {
+        this.setState({results})
+    }
 
     componentDidMount() {
         window.addEventListener('resize', () => {
@@ -29,32 +38,44 @@ class App extends Component {
     ])
 
     renderResults = () => {
-        const resultBlocks = exampleResult.map(result=>{
+        const resultBlocks = this.state.results.map(result => {
             console.log(result)
-            const title = result['Application Name']
-            const description = result['Application Description']
-            if(title && description){
-                return <ResultBlock key={title} title={title} description={description}/>
+            const name = result['name']
+            const description = result['description']
+            const category = result['category']
+            const subcategory = result['subcategory']
+            if (name && description && category && subcategory) {
+                return (
+                    <ResultBlock
+                        key={name}
+                        name={name}
+                        category={category}
+                        subcategory={subcategory}
+                        description={description}
+                    />
+                )
             }
             return null
         })
-        console.log(resultBlocks)
         return resultBlocks
     }
 
     render() {
         return (
-            <div className="App" style={{display: "flex", flexDirection: "column", alignItems:"center"}}>
-                <TopBar/>
+            <div className="App" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+                <TopBar setResults={this.setResults}/>
                 {this.renderResults()}
-                <div style={{
-                    flex: 1,
-                    position: "fixed",
-                    bottom: -30,
-                    display: "flex",
-                    alignItems: "flex-end",
-                    background: 'linear-gradient(#fff, #b3e3ff)'
-                }} ref={canvas => this.canvas = canvas}>
+                <div
+                    style={{
+                        flex: 1,
+                        position: "fixed",
+                        bottom: -30,
+                        display: "flex",
+                        alignItems: "flex-end",
+                        background: 'linear-gradient(#fff, #b3e3ff)',
+                        zIndex: -10
+                    }}
+                >
                     {this.renderMountains()}
                     {this.renderMooose()}
                 </div>

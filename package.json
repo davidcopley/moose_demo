@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "ismobilejs": "^0.4.1",
     "material-ui": "^0.20.1",
     "react": "^16.4.0",
+    "react-animated-enter": "^1.0.1",
     "react-dom": "^16.4.0",
     "react-scripts": "1.1.4"
   },
