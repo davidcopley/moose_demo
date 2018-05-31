@@ -129,7 +129,7 @@ export default class extends React.Component {
                         }
                     }}
                 />
-                {loading?<CircularProgress size={80} style={{position:'absolute',top:'1.5%',left:'0.8%',zIndex:1}}/>:null}
+                {loading?<CircularProgress size={50} style={{position:'absolute',top:'3.5%',right:'25%',zIndex:1}}/>:null}
                 <IconButton
                     iconStyle={{width: '48px', height: '48px'}}
                     style={{width: '96px', height: '96px', padding: '24px'}}
