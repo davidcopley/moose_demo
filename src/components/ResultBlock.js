@@ -1,6 +1,6 @@
 import React from "react"
 import {Card, CardTitle, CardText, CardMedia,List, ListItem} from "material-ui"
-import animatedEnter from 'react-animated-enter';
+import "./fadein.css"
 
 
 class ResultBlock extends React.Component{
@@ -8,7 +8,7 @@ class ResultBlock extends React.Component{
         const {name,description,category,subcategory,meta} = this.props
         console.log(meta)
         return (
-            <Card style={{minWidth:300,width:"70vw", maxHeight:500,marginTop:20,background:"rgba(255,255,255,0.8)"}}>
+            <Card style={{minWidth:300,width:"70vw", maxHeight:500,marginTop:20,background:"rgba(255,255,255,0.8)"}} className={'fadeIn'}>
                 <CardTitle>
                     Name
                 </CardTitle>
@@ -36,4 +36,4 @@ class ResultBlock extends React.Component{
     }
 }
 
-export default animatedEnter('fadeIn',1)(ResultBlock)
+export default ResultBlock

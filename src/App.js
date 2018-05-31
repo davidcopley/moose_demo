@@ -96,7 +96,6 @@ class App extends Component {
                     meta={meta}
                 />
             )
-            return null
         })
         return resultBlocks
     }
