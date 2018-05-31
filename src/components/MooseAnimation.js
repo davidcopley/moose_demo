@@ -11,7 +11,7 @@ class MooseAnimation extends React.Component {
         this.setState({
             currentOffset: this.props.defaultOffset
         }, () => {
-            this.animInterval = setInterval(this.animateMoose, Math.random() * 5000 + 5000)
+            this.animInterval = setInterval(this.animateMoose, Math.random() * 5000 + 2000)
         })
 
     }
@@ -25,9 +25,14 @@ class MooseAnimation extends React.Component {
     animateMoose = () => {
         const {defaultOffset} = this.props
         const currentOffset = this.state.currentOffset
-        const nextOffset = Math.random() * defaultOffset + 100
+        const currentDirection = this.state.direction
+        const nextOffset = Math.random() * defaultOffset + 500
         const direction = nextOffset > currentOffset ? 1 : -1
-        this.setState({currentOffset: nextOffset, direction})
+        if(currentDirection !== direction){
+            this.setState({direction})
+        }else {
+            this.setState({currentOffset: nextOffset})
+        }
     }
 
 

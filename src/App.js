@@ -32,7 +32,9 @@ class App extends Component {
 
     renderMooose = () => ([
         <MooseAnimation width={'10vh'} height={'10vh'} defaultOffset={window.innerWidth / 4}/>,
-        <MooseAnimation width={'11vh'} height={'11vh'} defaultOffset={window.innerWidth / 2}/>,
+        <MooseAnimation width={'12vh'} height={'12vh'} defaultOffset={window.innerWidth / 2}/>,
+        <MooseAnimation width={'6vh'} height={'6vh'} defaultOffset={window.innerWidth / 3}/>,
+        <MooseAnimation width={'11vh'} height={'11vh'} defaultOffset={window.innerWidth / 1.5}/>,
         <MooseAnimation width={'8vh'} height={'8vh'} defaultOffset={window.innerWidth / 4 * 3}/>,
         <MooseAnimation width={'13vh'} height={'13vh'} defaultOffset={window.innerWidth - 200}/>,
     ])
