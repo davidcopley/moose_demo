@@ -26,7 +26,13 @@ class ResultBlock extends React.Component{
                     <List style={{background:"#eeeeee"}}>
                         {meta?Object.keys(meta).filter(key=>meta[key] !== " ").map(key=>{
                             return(
-                                <ListItem disabled style={{fontSize:15}}><span style={{fontSize:10}}>{key}</span><br/>{meta[key]}</ListItem>
+                                <ListItem key={key} disabled style={{fontSize:15}}>
+                                    <span style={{fontSize:10}}>
+                                        {key}
+                                    </span>
+                                    <br/>
+                                    {meta[key]}
+                                </ListItem>
                             )
                         }):<CardText>No Meta Data</CardText>}
                     </List>

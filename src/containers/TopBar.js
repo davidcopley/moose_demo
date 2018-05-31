@@ -1,7 +1,7 @@
 import React from "react"
 import MooseIcon from "../image/moose_icon.png"
 import SearchIcon from "../image/search.svg"
-import {IconButton, TextField, Checkbox, CircularProgress} from "material-ui";
+import {IconButton, TextField, Checkbox} from "material-ui";
 import "./textReflection.css"
 import axios from "axios"
 import Loading from 'react-loading-bar'
@@ -15,6 +15,10 @@ const isMobileDevice = () => {
 };
 
 
+const API = "https://monash-moose-mvp-api.herokuapp.com/graphiql"
+const SECRET_API = "http://127.0.0.1:5000/graphiql"
+
+
 export default class extends React.Component {
     state = {
         name: true,
@@ -24,13 +28,18 @@ export default class extends React.Component {
         description: true,
         meta: true,
         query: "",
-        numResults:null,
+        numResults: null,
         loading: false,
-        error:false
+        error: false,
+        secretSwitch: false,
     }
 
     handleCheckboxClick = (checkbox, isChecked) => {
         this.setState({[checkbox]: isChecked},this.search)
+    }
+
+    handleSecretSwitch = () => {
+        this.setState(prevState => ({ secretSwitch: !prevState.secretSwitch }));
     }
 
     search = () => {
@@ -42,9 +51,12 @@ export default class extends React.Component {
             subcategory,
             description,
             meta,
-            query
+            query,
+            secretSwitch,
         } = this.state
-        const url = "https://monash-moose-mvp-api.herokuapp.com/graphiql"
+
+        const url = secretSwitch ? SECRET_API : API
+
         axios.post(url, {
             query: `
             query{
@@ -67,8 +79,7 @@ export default class extends React.Component {
                 if (result.data.data) {
                     if (result.data.data.search) {
                         if (result.data.data.search.responses) {
-                            this.setState({numResults:result.data.data.search.responses.length},this.props.setResults(result.data.data.search.responses))
-
+                            this.setState({ numResults:result.data.data.search.responses.length }, this.props.setResults(result.data.data.search.responses))
                         }
                     }
                 }
@@ -88,7 +99,8 @@ export default class extends React.Component {
             description,
             meta,
             query,
-            loading
+            loading,
+            secretSwitch,
         } = this.state
         return (
             <div
@@ -118,7 +130,7 @@ export default class extends React.Component {
                         }}
                         className={'shine'}
                     >
-                        MOOSE <sup style={{fontSize: 15}}>demo</sup>
+                        MOOSE <sup style={{fontSize: 15, color: secretSwitch?'#9a2f47':null}} onClick={this.handleSecretSwitch}>demo</sup>
                 </span>
                     }
                 </div>
