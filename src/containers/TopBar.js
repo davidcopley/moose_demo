@@ -1,7 +1,7 @@
 import React from "react"
 import MooseIcon from "../image/moose_icon.png"
 import SearchIcon from "../image/search.svg"
-import {IconButton, TextField, Checkbox} from "material-ui";
+import {IconButton, TextField, Checkbox, CircularProgress} from "material-ui";
 import "./textReflection.css"
 import axios from "axios"
 
@@ -20,7 +20,8 @@ export default class extends React.Component {
         description: true,
         meta: true,
         query: "",
-        numResults:null
+        numResults:null,
+        loading: false,
     }
 
     handleCheckboxClick = (checkbox, isChecked) => {
@@ -28,6 +29,7 @@ export default class extends React.Component {
     }
 
     search = () => {
+        this.setState({ loading: true })
         const {
             name,
             score,
@@ -55,6 +57,7 @@ export default class extends React.Component {
         `
         }).then(result => {
             console.log(result)
+            this.setState({ loading: false })
             if (result.data) {
                 if (result.data.data) {
                     if (result.data.data.search) {
@@ -66,6 +69,7 @@ export default class extends React.Component {
                 }
             }
         }).catch(err => {
+            this.setState({ loading: false })
             console.log(err)
         })
     }
@@ -78,7 +82,8 @@ export default class extends React.Component {
             subcategory,
             description,
             meta,
-            query
+            query,
+            loading
         } = this.state
         return (
             <div
@@ -124,6 +129,7 @@ export default class extends React.Component {
                         }
                     }}
                 />
+                {loading?<CircularProgress size={80} style={{position:'absolute',top:'1.5%',left:'0.8%',zIndex:1}}/>:null}
                 <IconButton
                     iconStyle={{width: '48px', height: '48px'}}
                     style={{width: '96px', height: '96px', padding: '24px'}}
