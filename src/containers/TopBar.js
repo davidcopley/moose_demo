@@ -157,7 +157,7 @@ export default class extends React.Component {
                 <div style={{position: "fixed", top: 130, left: 10, width: 200, height: 'auto'}}>
                     {this.state.numResults!==null&&`Found ${this.state.numResults} results`}
                 </div>
-                <div style={{position: "fixed", top: 200, left: 10, width: 200, height: 'auto'}}>
+                {/* <div style={{position: "fixed", top: 200, left: 10, width: 200, height: 'auto'}}>
                     <Checkbox onCheck={(e, i) => this.handleCheckboxClick('name', i)} checked={name} label={"name"}
                               labelStyle={{letterSpacing: 1}} iconStyle={{fill: "#1C73D4"}}/>
                     <Checkbox onCheck={(e, i) => this.handleCheckboxClick('score', i)} checked={score} label={'score'}
@@ -170,7 +170,7 @@ export default class extends React.Component {
                               label={'description'} labelStyle={{letterSpacing: 1}} iconStyle={{fill: "#1C73D4"}}/>
                     <Checkbox onCheck={(e, i) => this.handleCheckboxClick('meta', i)} checked={meta} label={'meta data'}
                               labelStyle={{letterSpacing: 1}} iconStyle={{fill: "#1C73D4"}}/>
-                </div>
+                </div> */}
             </div>
         )
     }
