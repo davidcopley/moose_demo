@@ -83,6 +83,7 @@ class App extends Component {
             const description = result['description']
             const category = result['category']
             const subcategory = result['subcategory']
+            const unitcode = result['unitcode']
             let meta = result['meta']
             if(meta){
                 meta = JSON.parse(meta)
@@ -91,6 +92,7 @@ class App extends Component {
                 <ResultBlock
                     key={`${name}+${category}+${subcategory}+${description}+${meta}+${i}`}
                     name={name}
+                    unitcode={unitcode}
                     category={category}
                     subcategory={subcategory}
                     description={description}

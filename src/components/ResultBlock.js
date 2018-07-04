@@ -4,14 +4,14 @@ import {Card, CardTitle, CardText, CardMedia,List, ListItem} from "material-ui"
 
 class ResultBlock extends React.Component{
     render(){
-        const {name,description,category,subcategory,meta} = this.props
+        const {name,unitcode,description,category,subcategory,meta} = this.props
         return (
             <Card style={{minWidth:300,width:"70vw", maxHeight:600,marginTop:20,background:"rgba(255,255,255,0.8)"}}>
                 <CardTitle style={{paddingBottom:0, color:'gray'}}>
                     Name
                 </CardTitle>
                 <CardText>
-                    <span style={{fontSize:20}}><b>{name||"No Name"}</b></span> - {subcategory||"No Subcategory"}, {category||"No Subcategory"}
+                    <span style={{fontSize:20}}><b>{/([A-Z]{3}[0-9]{3,4})/.test(unitcode) ?`[${unitcode}] `:''}{name||"No Name"}</b></span> - {subcategory||"No Subcategory"}, {category||"No Subcategory"}
                 </CardText>
                 <CardTitle style={{paddingBottom:0, color:'gray'}}>
                     Description
