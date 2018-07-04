@@ -33,7 +33,7 @@ export default class extends React.Component {
         secretSwitch: false,
         skip: 0,
         limit: 30,
-        categories: [],
+        categories: ['eSolutions', 'CUPID'],
     }
 
     handleCheckboxClick = (checkbox, isChecked) => {
