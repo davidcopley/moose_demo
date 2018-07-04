@@ -8,8 +8,6 @@ import Loading from 'react-loading-bar'
 import 'react-loading-bar/dist/index.css'
 
 
-
-
 const isMobileDevice = () => {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
@@ -24,6 +22,7 @@ export default class extends React.Component {
         name: true,
         score: true,
         category: true,
+        unitcode: true,
         subcategory: true,
         description: true,
         meta: true,
@@ -32,6 +31,9 @@ export default class extends React.Component {
         loading: false,
         error: false,
         secretSwitch: false,
+        skip: 0,
+        limit: 30,
+        categories: [],
     }
 
     handleCheckboxClick = (checkbox, isChecked) => {
@@ -42,17 +44,37 @@ export default class extends React.Component {
         this.setState(prevState => ({ secretSwitch: !prevState.secretSwitch }));
     }
 
+    handleCategoryClick = (category) => {
+        return () => {
+            const { categories } = this.state;
+            const index = categories.indexOf(category);
+            let updatedCategories = [...categories];
+            if (index >= 0)
+                updatedCategories.splice(index, 1);
+            else
+                updatedCategories.push(category);
+            this.setState({ categories: updatedCategories }, () => {
+                const { query } = this.state;
+                if (query) this.search();
+            });
+        }
+    }
+
     search = () => {
         this.setState({ loading: true, error: false })
         const {
             name,
             score,
             category,
+            unitcode,
             subcategory,
             description,
             meta,
             query,
             secretSwitch,
+            skip,
+            limit,
+            categories,
         } = this.state
 
         const url = secretSwitch ? SECRET_API : API
@@ -60,10 +82,11 @@ export default class extends React.Component {
         axios.post(url, {
             query: `
             query{
-              search(query:"${query}"){
+              search(query:"${query}",skip:${skip},limit:${limit},categories:[${categories.toString()}]){
                 responses{
                   ${name?'name':''}
                   ${score?'score':''}
+                  ${unitcode?'unitcode':''}
                   ${category?'category':''}
                   ${subcategory?'subcategory':''}
                   ${description?'description':''}
@@ -73,7 +96,6 @@ export default class extends React.Component {
             }
         `
         }).then(result => {
-            console.log(result)
             this.setState({ loading: false })
             if (result.data) {
                 if (result.data.data) {
@@ -98,10 +120,13 @@ export default class extends React.Component {
             subcategory,
             description,
             meta,
+            limit,
             query,
             loading,
             secretSwitch,
+            categories,
         } = this.state
+        
         return (
             <div
                 style={{
@@ -155,10 +180,18 @@ export default class extends React.Component {
                     <img src={SearchIcon} style={{width: 50, height: 50, position: 'relative'}} alt=""/>
                 </IconButton>
                 <div style={{position: "fixed", top: 130, left: 10, width: 200, height: 'auto'}}>
-                    {this.state.numResults!==null&&`Found ${this.state.numResults} results`}
+                    <p>
+                        Current limit: {limit} results
+                    </p>
+                    <p>
+                        {this.state.numResults!==null&&`Found ${this.state.numResults} results`}
+                    </p>
                 </div>
-                {/* <div style={{position: "fixed", top: 200, left: 10, width: 200, height: 'auto'}}>
-                    <Checkbox onCheck={(e, i) => this.handleCheckboxClick('name', i)} checked={name} label={"name"}
+                <div style={{position: "fixed", top: 190, left: 10, width: 200, height: 'auto'}}>
+                    <b>FILTER CATEGORY</b>
+                </div>
+                <div style={{position: "fixed", top: 220, left: 10, width: 200, height: 'auto'}}>
+                    {/* <Checkbox onCheck={(e, i) => this.handleCheckboxClick('name', i)} checked={name} label={"name"}
                               labelStyle={{letterSpacing: 1}} iconStyle={{fill: "#1C73D4"}}/>
                     <Checkbox onCheck={(e, i) => this.handleCheckboxClick('score', i)} checked={score} label={'score'}
                               labelStyle={{letterSpacing: 1}} iconStyle={{fill: "#1C73D4"}}/>
@@ -169,8 +202,12 @@ export default class extends React.Component {
                     <Checkbox onCheck={(e, i) => this.handleCheckboxClick('description', i)} checked={description}
                               label={'description'} labelStyle={{letterSpacing: 1}} iconStyle={{fill: "#1C73D4"}}/>
                     <Checkbox onCheck={(e, i) => this.handleCheckboxClick('meta', i)} checked={meta} label={'meta data'}
+                              labelStyle={{letterSpacing: 1}} iconStyle={{fill: "#1C73D4"}}/> */}
+                    <Checkbox onCheck={this.handleCategoryClick('eSolutions')} checked={categories.indexOf('eSolutions')>=0} label={'eSolutions'}
                               labelStyle={{letterSpacing: 1}} iconStyle={{fill: "#1C73D4"}}/>
-                </div> */}
+                    <Checkbox onCheck={this.handleCategoryClick('CUPID')} checked={categories.indexOf('CUPID')>=0} label={'CUPID'}
+                              labelStyle={{letterSpacing: 1}} iconStyle={{fill: "#1C73D4"}}/>
+                </div>
             </div>
         )
     }
